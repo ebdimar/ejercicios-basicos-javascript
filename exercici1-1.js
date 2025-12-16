@@ -6,7 +6,7 @@ Exercici 1: Conversió de funcions: Tens una funció add que accepta dos paràme
 
 const add = (a, b) => a + b;
 
-console.log("Prueba del ejercicio 1:", add(9, 8));
+console.log("Prova de l'exercici 1:", add(9, 8));
 
 /* 
 Exercici 2: Funció de fletxa sense paràmetres: Crea una funció de fletxa anomenada
@@ -43,23 +43,26 @@ Exercici 4: Funció de fletxa dins d'un loop: Crea una funció anomenada printNu
 */
 
 const printNumbers = (numberArray) => {
-  if (Array.isArray(numberArray) === true) {
-    const print = (number) => {
-      if (typeof number === "number") {
-        console.log(number);
-      } else {
-        console.log("Este elemento del array no es un número");
-      }
-    };
-    for (let i = 0; i < numberArray.length; i++) {
-      print(numberArray[i]);
-    }
-  } else {
-    console.log("El argumento de la función no es un array");
+  if (!Array.isArray(numberArray)) {
+    throw new Error("L'argument de la funció no és un array");
+  }
+  if (!numberArray.every((element) => typeof element === "number")) {
+    throw new Error("Algún element de l'array no és un número");
+  }
+  const print = (number) => {
+    console.log(number);
+  };
+
+  for (let i = 0; i < numberArray.length; i++) {
+    print(numberArray[i]);
   }
 };
 
-printNumbers([1, 2, 3, 5, 7, 9, 6, 2, "asdf", null]);
+try {
+  printNumbers([1, 2, 3, 5, 7, 9, 6, 2]);
+} catch (error) {
+  console.error(error.message);
+}
 
 /* 
 Exercici 5: Funció de fletxa amb 'setTimeout': Crea una funció de fletxa que imprimeixi un 
